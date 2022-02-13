@@ -1,38 +1,26 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import CardComponent from "../UI/CardComponent";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
-
-// interface Exercises {
-//     exerciseName: string,
-//     description: string,
-//     image: any,
-//     id?: string
-//   };
-
-// const exercises: Array<Exercises> = [
-//     {
-//         exerciseName: "Pushups",
-//         description: "It will pump your triceps and chest perfect!",
-//         image: pushups,
-//     },
-//     {
-//         exerciseName: "Run",
-//         description: "Classic cardio! Nothing unusual... But watch how to do that correct.",
-//         image: run,
-//     },
-//     {
-//         exerciseName: "Plank",
-//         description: "Perfect execise for your press!",
-//         image: plank,
-//     },
-// ];
+import ExercisePost from "./ExercisePost";
 
 const Exercises: FC = () => {
   const exercises = useSelector(state => state.exercises.exercises);
-  console.log(exercises);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [exerciseToOpen, setExerciseToOpen] = useState<null | {}>(null);
+
+  const postOpener = (clickedPost: object): void => {
+      setExerciseToOpen(clickedPost);
+      setIsOpen(true);
+  };
+
+  const postCloser = (): void => {
+    setIsOpen(false);
+  };
 
   return (
+    <>
+    <ExercisePost open={isOpen} exerciseToOpen={exerciseToOpen} postCloser={postCloser} />
     <Grid
       component="main"
       margin="20px auto"
@@ -44,15 +32,18 @@ const Exercises: FC = () => {
       {exercises.map((e, i) => {
         return (
           <Grid key={i} item>
+            <div onClick={() => postOpener(e)}>
             <CardComponent
               name={e.exerciseName}
               description={e.description}
               picture={e.image}
             />
+            </div>
           </Grid>
         );
       })}
     </Grid>
+    </>
   );
 };
 

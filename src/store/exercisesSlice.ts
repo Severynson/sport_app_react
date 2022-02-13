@@ -1,15 +1,8 @@
 import pushups from "../Images/Pushups.jpg";
 import plank from "../Images/Plank.jpg";
 import run from "../Images/Run.jpg";
+import { Exercise } from "../interfaces";
 import { createSlice } from "@reduxjs/toolkit";
-
-interface Exercise {
-    exerciseName: string,
-    description: string,
-    image: any,
-    exerciseVideoLink: string,
-    id?: string  
-};
 
 interface ExercisesSliceState {
 exercises: Exercise[];
