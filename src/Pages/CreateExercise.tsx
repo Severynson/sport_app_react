@@ -5,6 +5,8 @@ import { TextField, Button, TextareaAutosize, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { grey, red } from "@mui/material/colors";
 import { Collections } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { addExercise } from "../store/exercisesSlice";
 const background = grey[200];
 const errorColor = red[500];
 
@@ -32,6 +34,7 @@ const useStyles = makeStyles({
 })
 
 const CreateExercise: FC = () => {
+    const dispatch = useDispatch();
     const classes = useStyles();
 
     const {
@@ -47,8 +50,7 @@ const CreateExercise: FC = () => {
     });
 
     const onSubmit: (object) => void = (data) => {
-        console.log(data);
-        alert(JSON.stringify(data));
+        dispatch(addExercise(data));
         reset();
     };
   
@@ -73,13 +75,19 @@ const CreateExercise: FC = () => {
           label="Exercise video link"
           helperText={errors?.exerciseVideoLink && "Required..."}
         />
-         <input
-            { ...register("exerciseImage", {required: true}) }
+        <TextField
+          error={!!errors?.image}
+          { ...register("image", {required: true}) }
+          id="outlined-error-helper-text"
+          label="Exercise image link"
+          helperText={errors?.exerciseVideoLink && "Required..."}
+        />
+         {/* <input
+            { ...register("image", {required: true}) }
             accept="image/*"
             style={{ display: "none" }}
             id="raised-button-file"
-            name="exerciseImage"
-            multiple
+            name="image"
             type="file"
           />
           <label htmlFor="raised-button-file">
@@ -90,12 +98,12 @@ const CreateExercise: FC = () => {
               Uppload exercise picture
             </Button>
             <Typography color={errorColor}>{errors?.exerciseImage && "Exercise couldn't be posted without image!"}</Typography>
-          </label>
+          </label> */}
          <TextareaAutosize
-         { ...register("exerciseDescription", {required: true}) }
+         { ...register("description", {required: true}) }
       aria-label="minimum height"
       minRows={5}
-      placeholder="Describe exercises by stepts (using enter-space to Start a new step)."
+      placeholder="Describe exercises by steps (using enter-space to Start a new step)."
       style={{ width: 200 }}
     />
         <Typography color={errorColor}>{errors?.exerciseDescription && "Description couldn't be empty!"}</Typography>

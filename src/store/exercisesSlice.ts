@@ -7,6 +7,7 @@ interface Exercise {
     exerciseName: string,
     description: string,
     image: any,
+    exerciseVideoLink: string,
     id?: string  
 };
 
@@ -17,19 +18,22 @@ exercises: Exercise[];
 const initialState: ExercisesSliceState = {
 exercises: [
     {
-        exerciseName: "Pushups",
+        exerciseName: "Push ups",
         description: "It will pump your triceps and chest perfect!",
         image: pushups,
+        exerciseVideoLink: "https://www.youtube.com/watch?v=-T64FLsJnAU&ab_channel=ATHLEAN-X%E2%84%A2",
     },
     {
         exerciseName: "Run",
         description: "Classic cardio! Nothing unusual... But watch how to do that correct.",
         image: run,
+        exerciseVideoLink: "https://www.youtube.com/watch?v=_kGESn8ArrU&ab_channel=GlobalTriathlonNetwork",
     },
     {
         exerciseName: "Plank",
         description: "Perfect execise for your press!",
         image: plank,
+        exerciseVideoLink: "https://www.youtube.com/watch?v=Z90xpWvuUPs&ab_channel=emiwong",
     },
 ],
 };
@@ -39,7 +43,8 @@ const exercisesSlice = createSlice({
     initialState,
     reducers: {
         addExercise(state, action) {
-            state.exercises.push(action);
+            console.log(action.payload);
+            state.exercises.push(action.payload);
         }
     }
 });

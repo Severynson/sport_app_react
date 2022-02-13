@@ -30,6 +30,7 @@ import { useSelector } from "react-redux";
 
 const Exercises: FC = () => {
   const exercises = useSelector(state => state.exercises.exercises);
+  console.log(exercises);
 
   return (
     <Grid
