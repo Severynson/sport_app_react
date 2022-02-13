@@ -1,29 +1,36 @@
 import { FC } from "react";
 import CardComponent from "../UI/CardComponent";
-import pushups from "../Images/Pushups.jpg";
-import plank from "../Images/Plank.jpg";
-import run from "../Images/Run.jpg";
 import { Grid } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const exercises = [
-    {
-        exerciseName: "Pushups",
-        description: "It will pump your triceps and chest perfect!",
-        image: pushups,
-    },
-    {
-        exerciseName: "Run",
-        description: "Classic cardio! Nothing unusual... But watch how to do that correct.",
-        image: run,
-    },
-    {
-        exerciseName: "Plank",
-        description: "Perfect execise for your press!",
-        image: plank,
-    },
-];
+// interface Exercises {
+//     exerciseName: string,
+//     description: string,
+//     image: any,
+//     id?: string
+//   };
+
+// const exercises: Array<Exercises> = [
+//     {
+//         exerciseName: "Pushups",
+//         description: "It will pump your triceps and chest perfect!",
+//         image: pushups,
+//     },
+//     {
+//         exerciseName: "Run",
+//         description: "Classic cardio! Nothing unusual... But watch how to do that correct.",
+//         image: run,
+//     },
+//     {
+//         exerciseName: "Plank",
+//         description: "Perfect execise for your press!",
+//         image: plank,
+//     },
+// ];
 
 const Exercises: FC = () => {
+  const exercises = useSelector(state => state.exercises.exercises);
+
   return (
     <Grid
       component="main"
